@@ -3,7 +3,7 @@ import { Printer, Wifi, WifiOff, RefreshCw, CheckCircle, XCircle } from "lucide-
 import { Button } from "@/components/ui/button";
 import { chequearImpresoras } from "@/services/print";
 
-const PRINT_URL = import.meta.env.VITE_PRINT_MIDDLEWARE_URL ?? "http://localhost:4000";
+import { PRINT_URL } from "@/services/print";
 
 interface PrinterStatus {
   id: string;

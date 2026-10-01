@@ -1,7 +1,15 @@
 import { destinoPorCategoria } from "@/lib/destino";
 import { type Pedido, type DetallePedido, type DestinoImpresion } from "./db";
 
-const PRINT_URL = import.meta.env.VITE_PRINT_MIDDLEWARE_URL ?? "http://localhost:4000";
+// Túnel ngrok fijo hacia el servidor de impresoras del local.
+const NGROK_URL = "https://impotency-slicing-hungry.ngrok-free.dev";
+const ENV_URL: string | undefined = import.meta.env.VITE_PRINT_MIDDLEWARE_URL;
+// En la app publicada (https) el navegador bloquea direcciones http (IP local / localhost),
+// así que si la variable no es https se usa el túnel ngrok.
+export const PRINT_URL =
+  ENV_URL?.startsWith("https://") || (typeof window !== "undefined" && window.location.protocol === "http:" && ENV_URL)
+    ? ENV_URL
+    : NGROK_URL;
 
 export interface PrintResult {
   success: boolean;
