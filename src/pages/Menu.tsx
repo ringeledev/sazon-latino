@@ -1,3 +1,4 @@
+import { destinoPorCategoria } from "@/lib/destino";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -56,6 +57,7 @@ const Menu = () => {
           precio: producto.precio,
           categoria: producto.categoria,
           disponible: producto.disponible,
+          destino_impresion: destinoPorCategoria(producto.categoria),
         });
       } else {
         await updateProducto(producto.uuid, {
@@ -63,6 +65,7 @@ const Menu = () => {
           precio: producto.precio,
           categoria: producto.categoria,
           disponible: producto.disponible,
+          destino_impresion: destinoPorCategoria(producto.categoria),
         });
       }
       setEditingProduct(null);

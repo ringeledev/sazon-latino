@@ -1,3 +1,4 @@
+import { destinoPorCategoria } from "@/lib/destino";
 import { type Pedido, type DetallePedido, type DestinoImpresion } from "./db";
 
 const PRINT_URL = import.meta.env.VITE_PRINT_MIDDLEWARE_URL ?? "http://localhost:4000";
@@ -70,7 +71,7 @@ export async function imprimirComandas(pedido: Pedido, mesaNumero: number): Prom
     cantidad: d.cantidad,
     nombre: d.productos?.nombre ?? d.nombre_extra ?? "Ítem",
     notas: d.notas,
-    destino: d.productos?.destino_impresion ?? "cocina",
+    destino: d.productos ? destinoPorCategoria(d.productos.categoria) : "cocina",
   }));
   return imprimirComandasDeItems(items, mesaNumero, pedido.cliente_nombre, pedido.profiles?.nombre);
 }

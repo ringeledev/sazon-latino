@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getProductos, agregarDetallesAPedido, type Producto, type NuevoDetalle } from "@/services/db";
+import { destinoPorCategoria } from "@/lib/destino";
 import { imprimirComandasDeItems, type ItemParaComanda } from "@/services/print";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -116,7 +117,7 @@ const AgregarItemsDialog = ({ pedidoUuid, clienteNombre, mesaNumero, onClose, on
         cantidad: i.cantidad,
         nombre: i.producto.nombre,
         notas: i.notas.trim() || undefined,
-        destino: i.producto.destino_impresion ?? "cocina",
+        destino: destinoPorCategoria(i.producto.categoria),
       }));
       imprimirComandasDeItems(itemsParaComanda, mesaNumero, clienteNombre)
         .then((results) => {

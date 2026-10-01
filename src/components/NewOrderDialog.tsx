@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { type User } from "@/lib/store";
 import { getProductos, createPedido, createProducto, type Producto, type NuevoDetalle, type DestinoImpresion } from "@/services/db";
+import { destinoPorCategoria, esCategoriaExtras } from "@/lib/destino";
 import { imprimirComandasDeItems, type ItemParaComanda } from "@/services/print";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -97,7 +98,7 @@ const NewOrderDialog = ({ tableNumber, user, existingLideres = [], onClose, onCr
     setSavingExtra(true);
     try {
       // Save to productos DB so all waiters can see it
-      const destino: DestinoImpresion = activeCategory === "Extras Bebidas" ? "barra" : "cocina";
+      const destino: DestinoImpresion = destinoPorCategoria(activeCategory);
       const nuevo = await createProducto({
         nombre: extraForm.nombre.trim(),
         precio,
@@ -179,7 +180,7 @@ const NewOrderDialog = ({ tableNumber, user, existingLideres = [], onClose, onCr
         cantidad: i.cantidad,
         nombre: i.producto.nombre,
         notas: i.notas.trim() || undefined,
-        destino: i.producto.destino_impresion ?? "cocina",
+        destino: destinoPorCategoria(i.producto.categoria),
       }));
       imprimirComandasDeItems(itemsParaComanda, tableNumber, liderNombre.trim(), user.name)
         .then((results) => {
@@ -350,7 +351,7 @@ const NewOrderDialog = ({ tableNumber, user, existingLideres = [], onClose, onCr
             )}
 
             {/* Ítem extra form — solo en Extras Bebidas / Extras Comidas */}
-            {(activeCategory === "Extras Bebidas" || activeCategory === "Extras Comidas") && (
+            {esCategoriaExtras(activeCategory) && (
               showExtraForm ? (
               <div className="border border-amber-500/30 rounded-lg p-3 space-y-2 bg-amber-500/5">
                 <p className="text-xs text-amber-400 font-medium">
