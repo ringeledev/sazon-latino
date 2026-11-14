@@ -72,6 +72,7 @@ export default defineConfig(({ mode }) => ({
             { find: /^@\/services\/print$/, replacement: src("services/print.demo.ts") },
             { find: /^@\/lib\/supabase$/, replacement: src("lib/supabase.demo.ts") },
             { find: /^@\/hooks\/useRealtimePedidos$/, replacement: src("hooks/useRealtimePedidos.demo.ts") },
+            { find: /^date-fns\/locale$/, replacement: src("lib/dateLocale.demo.ts") },
           ]
         : []),
       { find: "@", replacement: path.resolve(__dirname, "./src") },
