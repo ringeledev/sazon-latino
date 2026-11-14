@@ -1,4 +1,4 @@
-// Demo data — 100% fictional. Used only when VITE_DEMO=true.
+// Demo data — 100% fictional, in English for the public demo. Used only when VITE_DEMO=true.
 import { destinoPorCategoria } from "@/lib/destino";
 
 type Row = Record<string, any>;
@@ -26,37 +26,40 @@ let counter = 0;
 const id = (prefix: string) => `${prefix}-${(++counter).toString(36)}-demo`;
 
 const PRODUCTOS: [string, number, string][] = [
-  ["Empanada de pino", 3.5, "Entradas"],
-  ["Empanada de queso", 3.0, "Entradas"],
-  ["Tequeños (6 uds.)", 6.5, "Entradas"],
-  ["Ceviche de pescado", 9.5, "Entradas"],
-  ["Guacamole con totopos", 6.0, "Entradas"],
-  ["Lomo saltado", 16.5, "Platos"],
-  ["Arepa reina pepiada", 9.0, "Platos"],
-  ["Pabellón criollo", 14.5, "Platos"],
-  ["Tacos al pastor (3 uds.)", 11.0, "Platos"],
-  ["Ají de gallina", 13.5, "Platos"],
-  ["Pollo a la brasa (1/4)", 12.0, "Platos"],
-  ["Completo italiano", 7.5, "Platos"],
-  ["Tres leches", 5.5, "Postres"],
-  ["Alfajor de maicena", 3.0, "Postres"],
-  ["Churros con chocolate", 5.0, "Postres"],
-  ["Limonada de menta", 4.0, "Bebidas sin alcohol"],
+  ["Beef empanada", 3.5, "Entrada"],
+  ["Cheese empanada", 3.0, "Entrada"],
+  ["Tequeños (6 pcs)", 6.5, "Entrada"],
+  ["Fish ceviche", 9.5, "Entrada"],
+  ["Guacamole & tortilla chips", 6.0, "Bocadillos"],
+  ["Yuca fries", 4.5, "Bocadillos"],
+  ["Lomo saltado", 16.5, "Plato fuerte"],
+  ["Arepa reina pepiada", 9.0, "Plato fuerte"],
+  ["Pabellón criollo", 14.5, "Plato fuerte"],
+  ["Tacos al pastor (3 pcs)", 11.0, "Plato fuerte"],
+  ["Ají de gallina", 13.5, "Plato fuerte"],
+  ["Rotisserie chicken (1/4)", 12.0, "Plato fuerte"],
+  ["Chilean hot dog", 7.5, "Plato fuerte"],
+  ["Tres leches cake", 5.5, "Postre"],
+  ["Alfajor", 3.0, "Postre"],
+  ["Churros with chocolate", 5.0, "Postre"],
+  ["Mint lemonade", 4.0, "Bebidas sin alcohol"],
   ["Inca Kola", 3.5, "Bebidas sin alcohol"],
-  ["Agua mineral", 2.5, "Bebidas sin alcohol"],
-  ["Jugo de maracuyá", 4.5, "Bebidas sin alcohol"],
-  ["Pisco sour", 8.0, "Bebidas alcohólicas"],
-  ["Michelada", 6.5, "Bebidas alcohólicas"],
-  ["Cerveza Cusqueña", 4.5, "Bebidas alcohólicas"],
-  ["Caipirinha", 8.5, "Bebidas alcohólicas"],
-  ["Café cortado", 2.5, "Café"],
-  ["Café con leche", 3.0, "Café"],
-  ["Extra palta", 1.5, "Extras comidas"],
-  ["Extra papas fritas", 3.0, "Extras comidas"],
+  ["Sparkling water", 2.5, "Bebidas sin alcohol"],
+  ["Passion fruit juice", 4.5, "Bebidas sin alcohol"],
+  ["Pisco sour", 8.0, "Bebidas alcoholicas"],
+  ["Michelada", 6.5, "Bebidas alcoholicas"],
+  ["Cusqueña beer", 4.5, "Bebidas alcoholicas"],
+  ["Caipirinha", 8.5, "Bebidas alcoholicas"],
+  ["Tequila shot", 4.0, "Shots"],
+  ["Espresso", 2.5, "Café"],
+  ["Café latte", 3.0, "Café"],
+  ["Extra avocado", 1.5, "Extras comidas"],
+  ["Extra fries", 3.0, "Extras comidas"],
+  ["Extra shot of rum", 2.5, "Extras bebidas"],
 ];
 
-const CLIENTES = ["Andrea", "Jonas", "Sofía", "Lukas", "Valentina", "Felix", "Camila", "Leon", "Martina", "Paul", "Diego", "Emma", "Lucas", "Mia", "Tomás", "Hannah"];
-const NOTAS = ["sin cebolla", "poco picante", "bien cocido", "sin hielo", "para compartir", ""];
+const CLIENTES = ["Andrea", "Jonas", "Sophie", "Lukas", "Valentina", "Felix", "Camila", "Leon", "Martina", "Paul", "Diego", "Emma", "Lucas", "Mia", "Tom", "Hannah"];
+const NOTAS = ["no onion", "mild", "well done", "no ice", "to share", ""];
 
 export function buildDemoDB(): DemoDB {
   counter = 0;
@@ -67,8 +70,8 @@ export function buildDemoDB(): DemoDB {
   const profiles: Row[] = [
     { uuid: id("usr"), nombre: "Admin Demo", rol: "admin", pin: "1234", activo: true, color: "#f2a33a", session_token: null },
     { uuid: id("usr"), nombre: "Carlos", rol: "waiter", pin: "1111", activo: true, color: "#3b82f6", session_token: null },
-    { uuid: id("usr"), nombre: "María", rol: "waiter", pin: "2222", activo: true, color: "#ec4899", session_token: null },
-    { uuid: id("usr"), nombre: "Lucía", rol: "waiter", pin: "3333", activo: true, color: "#22c55e", session_token: null },
+    { uuid: id("usr"), nombre: "Maria", rol: "waiter", pin: "2222", activo: true, color: "#ec4899", session_token: null },
+    { uuid: id("usr"), nombre: "Lucy", rol: "waiter", pin: "3333", activo: true, color: "#22c55e", session_token: null },
   ];
   const meseros = profiles.filter((p) => p.rol === "waiter");
 
@@ -82,13 +85,13 @@ export function buildDemoDB(): DemoDB {
     created_at: now.toISOString(),
     updated_at: now.toISOString(),
   }));
-  const esBebida = (p: Row) => /^(Bebidas|Caf)/.test(p.categoria);
+  const esBebida = (p: Row) => /^(Bebidas|Caf|Shots)/.test(p.categoria);
   const comida = productos.filter((p) => !esBebida(p) && !p.categoria.startsWith("Extras"));
   const bebida = productos.filter(esBebida);
 
   const mesas: Row[] = [];
   for (let n = 1; n <= 12; n++) mesas.push({ uuid: id("mes"), numero: n, estado_actual: "libre", es_personal: false });
-  mesas.push({ uuid: id("mes"), numero: 20, estado_actual: "libre", es_personal: true });
+  mesas.push({ uuid: id("mes"), numero: 901, estado_actual: "libre", es_personal: true });
   const mesasClientes = mesas.filter((m) => !m.es_personal);
   const mesaPersonal = mesas.find((m) => m.es_personal)!;
 
