@@ -21,7 +21,7 @@ const AuthGate = () => {
   if (!user) return <Login />;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
       <AppLayout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
