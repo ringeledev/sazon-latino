@@ -6,7 +6,7 @@ A web-based order management system (POS) built for **Sazón Latino**, a Latin A
 
 > ▶️ **[Try the live demo](https://ringeledev.github.io/sazon-latino/demo/)** — log in with PIN **1234** (admin) or **1111** (waiter). It runs entirely in your browser with fake data (no database, printing is simulated), so feel free to break things — the ↺ button resets it.
 
-> UI language: Spanish (built for a Spanish-speaking team).
+> UI language: the production app is in Spanish (built for a Spanish-speaking team); the live demo is in English.
 
 ---
 
