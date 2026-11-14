@@ -2,7 +2,9 @@
 
 A web-based order management system (POS) built for **Sazón Latino**, a Latin American restaurant. It covers the full service flow: taking orders at the table, sending them to the kitchen and bar printers, closing the bill and analysing sales.
 
-> 📌 **Showcase copy.** This repository is a public copy of the system that is currently **running in production at the restaurant**. The live app is private because it handles real orders and sales — a demo can be shown on request.
+> 📌 **Showcase copy.** This repository is a public copy of the system that is currently **running in production at the restaurant**. The live app is private because it handles real orders and sales.
+
+> ▶️ **[Try the live demo](https://ringeledev.github.io/sazon-latino/demo/)** — log in with PIN **1234** (admin) or **1111** (waiter). It runs entirely in your browser with fake data (no database, printing is simulated), so feel free to break things — the ↺ button resets it.
 
 > UI language: Spanish (built for a Spanish-speaking team).
 
