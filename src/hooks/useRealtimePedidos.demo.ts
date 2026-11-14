@@ -1,4 +1,4 @@
-// DEMO realtime: refreshes when demo data changes (also across tabs, e.g. "Cocina" in a second tab).
+// DEMO realtime: refreshes when demo data changes (also across browser tabs).
 import { useEffect, useRef } from "react";
 import { DEMO_CHANGE_EVENT } from "@/services/db";
 
@@ -13,7 +13,7 @@ export function useRealtimePedidos(onUpdate: () => void) {
       t = setTimeout(() => callbackRef.current(), 150);
     };
     const onStorage = (e: StorageEvent) => {
-      if (e.key === "sazon_demo_db_v1") fire();
+      if (e.key === "sazon_demo_db_v2") fire();
     };
     window.addEventListener(DEMO_CHANGE_EVENT, fire);
     window.addEventListener("storage", onStorage);
