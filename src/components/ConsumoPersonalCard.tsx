@@ -4,9 +4,10 @@ import {
   UserCog, ChevronDown, ChevronUp, RefreshCw, GlassWater, UtensilsCrossed, Package, Loader2,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { esCategoriaBebida } from "@/lib/destino";
 
 const CATEGORIAS_BEBIDA = ["bebidas", "extras bebidas", "bebida", "extra bebidas", "extras bebida"];
-const esBebida = (cat: string) => CATEGORIAS_BEBIDA.includes(cat.trim().toLowerCase());
+const esBebida = (cat: string) => esCategoriaBebida(cat) || CATEGORIAS_BEBIDA.includes(cat.trim().toLowerCase());
 
 const iconoCategoria = (categoria: string) => {
   if (esBebida(categoria)) return <GlassWater size={14} />;
