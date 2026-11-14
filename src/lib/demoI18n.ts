@@ -107,6 +107,8 @@ const EXACT = {
   "Consumo Personal: $": "Staff consumption: $", "Ganancias por": "Revenue by", "vendidos": "sold", "vendido": "sold",
   "cobrado": "paid", "prom. $": "avg. $", "pedidos cobrados en total": "paid orders in total",
   "ítems ·": "items ·", "ítems": "items", "ítem": "item", "PIN:": "PIN:",
+  "Mesero/a": "Waiter", "Todas": "All", "Cliente:": "Customer:", "No, gracias": "No, thanks", "Seleccionar todo": "Select all",
+  "Deseleccionar todo": "Deselect all", "(vos)": "(you)", "en": "in", "Mesero:": "Waiter:", "Mesa:": "Table:",
   // Category labels split over two lines in charts
   "Bebidas sin": "Soft", "alcohol": "drinks", "alcoholicas": "(alcoholic)", "alcohólicas": "(alcoholic)",
   "Plato": "Main", "fuerte": "courses", "Extras": "Extras", "comidas": "(food)", "bebidas": "(drinks)",
