@@ -493,9 +493,9 @@ function mountBanner() {
     "position:fixed;left:50%;top:6px;transform:translateX(-50%);z-index:2147483000;" +
     "background:rgba(26,22,14,.94);color:#f5e9d4;border:1px solid #f2a33a;border-radius:999px;" +
     "padding:3px 6px 3px 12px;font:11px/1.3 system-ui,sans-serif;display:flex;gap:10px;align-items:center;" +
-    "box-shadow:0 6px 24px rgba(0,0,0,.35);max-width:calc(100vw - 24px);flex-wrap:wrap;justify-content:center";
+    "box-shadow:0 6px 24px rgba(0,0,0,.35);max-width:calc(100vw - 24px);white-space:nowrap;justify-content:center";
   el.innerHTML =
-    '<span><b style="color:#f2a33a">DEMO</b> · PIN admin <b>1234</b> · waiter <b>1111</b></span>' +
+    '<span><b style="color:#f2a33a">DEMO</b> · admin <b>1234</b> · waiter <b>1111</b></span>' +
     '<button id="sazon-demo-reset" style="background:#f2a33a;color:#1a160e;border:0;border-radius:999px;padding:2px 8px;font-weight:600;cursor:pointer" title="Reset demo">↺</button>' +
     '<button id="sazon-demo-hide" aria-label="Hide" style="background:transparent;color:#f5e9d4;border:0;cursor:pointer;padding:0 4px">✕</button>';
   document.body.appendChild(el);
