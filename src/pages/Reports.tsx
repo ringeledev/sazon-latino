@@ -14,6 +14,7 @@ import { es } from "date-fns/locale";
 import { Loader2, RefreshCw, User, TrendingUp, UtensilsCrossed, GlassWater, UserCog, Receipt, ShoppingBag, Package, LayoutGrid, FileSpreadsheet } from "lucide-react";
 import { exportarReporteExcel } from "@/services/exportExcel";
 import { Button } from "@/components/ui/button";
+import { esCategoriaBebida } from "@/lib/destino";
 
 const COLORS = [
   "hsl(42,80%,55%)", "hsl(10,70%,50%)", "hsl(150,60%,45%)",
@@ -24,7 +25,7 @@ type Period = "day" | "week" | "month";
 type Tab = "general" | "meseros" | "historial";
 
 const CATEGORIAS_BEBIDA = ["bebida", "bebidas", "coctel", "cocteles", "bar", "trago", "tragos", "jugo", "jugos"];
-const esBebida = (cat?: string) => CATEGORIAS_BEBIDA.includes((cat ?? "").toLowerCase());
+const esBebida = (cat?: string) => esCategoriaBebida(cat) || CATEGORIAS_BEBIDA.includes((cat ?? "").toLowerCase());
 
 const Reports = () => {
   const [period, setPeriod] = useState<Period>("day");
