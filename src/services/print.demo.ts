@@ -20,7 +20,7 @@ const wait = (ms = 300) => new Promise((r) => setTimeout(r, ms));
 
 function aviso(msg: string) {
   try {
-    toast.info(`🖨️ Demo: ${msg}`, { description: "Impresión simulada — en el restaurante sale por la impresora térmica." });
+    toast.info(`🖨️ Demo: ${msg}`, { description: "Simulated printing. At the restaurant this goes to the thermal printer." });
   } catch {
     /* ignore */
   }
@@ -34,7 +34,7 @@ export async function imprimirComandasDeItems(
 ): Promise<PrintResult[]> {
   await wait();
   const destinos = Array.from(new Set(items.map((i) => i.destino).filter((d) => d && d !== "ninguno")));
-  if (destinos.length) aviso(`comanda de Mesa ${mesaNumero} enviada a ${destinos.join(" y ")}`);
+  if (destinos.length) aviso(`Table ${mesaNumero} ticket sent to ${destinos.map((d) => (d === "barra" ? "bar" : "kitchen")).join(" and ")}`);
   return destinos.map(() => ({ success: true }));
 }
 
@@ -56,16 +56,16 @@ export async function imprimirBoletaYAbrirGaveta(
   _mesero?: string
 ): Promise<PrintResult> {
   await wait();
-  aviso(`boleta de Mesa ${mesaNumero} ($${Number(total).toFixed(2)}) y apertura de caja`);
+  aviso(`Table ${mesaNumero} receipt ($${Number(total).toFixed(2)}) printed, cash drawer opened`);
   return { success: true };
 }
 
 export async function chequearImpresoras(): Promise<{ id: string; nombre: string; online: boolean }[]> {
   await wait(400);
   return [
-    { id: "cocina", nombre: "Cocina (demo)", online: true },
-    { id: "barra", nombre: "Barra (demo)", online: true },
-    { id: "caja", nombre: "Caja (demo)", online: true },
+    { id: "cocina", nombre: "Kitchen (demo)", online: true },
+    { id: "barra", nombre: "Bar (demo)", online: true },
+    { id: "caja", nombre: "Cash desk (demo)", online: true },
   ];
 }
 
@@ -76,7 +76,7 @@ if (typeof window !== "undefined" && !(window as any).__sazonDemoFetch) {
   window.fetch = (input: RequestInfo | URL, init?: RequestInit) => {
     const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
     if (url.startsWith(PRINT_URL)) {
-      aviso("ticket de prueba impreso");
+      aviso("test ticket printed");
       return Promise.resolve(
         new Response(JSON.stringify({ success: true }), { headers: { "Content-Type": "application/json" } })
       );
