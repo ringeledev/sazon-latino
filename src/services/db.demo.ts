@@ -4,6 +4,9 @@
 // Enabled only when building with VITE_DEMO=true (see vite.config.ts).
 // ─────────────────────────────────────────────────────────────────────────────
 import { buildDemoDB, type DemoDB } from "@/lib/demoData";
+import { startDemoTranslation } from "@/lib/demoI18n";
+
+startDemoTranslation();
 import type {
   EstadoPedido,
   Producto,
@@ -39,7 +42,7 @@ export type {
 
 type Row = Record<string, any>;
 
-const KEY = "sazon_demo_db_v1";
+const KEY = "sazon_demo_db_v2";
 export const DEMO_CHANGE_EVENT = "sazon-demo-change";
 
 function load(): DemoDB {
@@ -160,7 +163,7 @@ export async function getUsuarios(): Promise<UsuarioAdmin[]> {
 export async function createUsuario(payload: Omit<UsuarioAdmin, "uuid">): Promise<void> {
   await wait();
   const db = load();
-  if (db.profiles.some((p) => p.pin === payload.pin)) throw new Error("Ese PIN ya está en uso");
+  if (db.profiles.some((p) => p.pin === payload.pin)) throw new Error("That PIN is already in use");
   db.profiles.push({ uuid: uuid(), color: "#a855f7", ...payload });
   save(db);
 }
@@ -220,7 +223,7 @@ export async function deleteProducto(id: string): Promise<void> {
   const db = load();
   if (db.detalles_pedido.some((d) => d.producto_id === id)) {
     // Same behaviour as the real DB (foreign key): products with orders can't be deleted
-    throw { code: "23503", message: "El producto tiene pedidos registrados" };
+    throw { code: "23503", message: "This product has recorded orders" };
   }
   db.productos = db.productos.filter((x) => x.uuid !== id);
   save(db);
@@ -437,7 +440,7 @@ export async function createPedido(
   await wait();
   const db = load();
   const mesa = db.mesas.find((m) => m.numero === mesaNumero);
-  if (!mesa) throw new Error(`Mesa ${mesaNumero} no encontrada`);
+  if (!mesa) throw new Error(`Table ${mesaNumero} not found`);
   const now = nowIso();
   const pedido: Row = {
     uuid: uuid(),
@@ -492,12 +495,12 @@ function mountBanner() {
     "padding:3px 6px 3px 12px;font:11px/1.3 system-ui,sans-serif;display:flex;gap:10px;align-items:center;" +
     "box-shadow:0 6px 24px rgba(0,0,0,.35);max-width:calc(100vw - 24px);flex-wrap:wrap;justify-content:center";
   el.innerHTML =
-    '<span><b style="color:#f2a33a">DEMO</b> · PIN admin <b>1234</b> · mesero <b>1111</b></span>' +
-    '<button id="sazon-demo-reset" style="background:#f2a33a;color:#1a160e;border:0;border-radius:999px;padding:2px 8px;font-weight:600;cursor:pointer" title="Reiniciar demo">↺</button>' +
-    '<button id="sazon-demo-hide" aria-label="Ocultar" style="background:transparent;color:#f5e9d4;border:0;cursor:pointer;padding:0 4px">✕</button>';
+    '<span><b style="color:#f2a33a">DEMO</b> · PIN admin <b>1234</b> · waiter <b>1111</b></span>' +
+    '<button id="sazon-demo-reset" style="background:#f2a33a;color:#1a160e;border:0;border-radius:999px;padding:2px 8px;font-weight:600;cursor:pointer" title="Reset demo">↺</button>' +
+    '<button id="sazon-demo-hide" aria-label="Hide" style="background:transparent;color:#f5e9d4;border:0;cursor:pointer;padding:0 4px">✕</button>';
   document.body.appendChild(el);
   el.querySelector("#sazon-demo-reset")?.addEventListener("click", () => {
-    if (confirm("¿Reiniciar la demo con los datos de ejemplo?")) resetDemo();
+    if (confirm("Reset the demo to the sample data?")) resetDemo();
   });
   el.querySelector("#sazon-demo-hide")?.addEventListener("click", () => el.remove());
 }
