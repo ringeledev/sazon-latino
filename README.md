@@ -2,7 +2,7 @@
 
 A web-based order management system (POS) built for **Sazón Latino**, a Latin American restaurant. It covers the full service flow: taking orders at the table, sending them to the kitchen and bar printers, closing the bill and analysing sales.
 
-**🔗 Live demo:** https://sazon-latino-five.vercel.app
+> 📌 **Showcase copy.** This repository is a public copy of the system that is currently **running in production at the restaurant**. The live app is private because it handles real orders and sales — a demo can be shown on request.
 
 > UI language: Spanish (built for a Spanish-speaking team).
 
